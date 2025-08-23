@@ -62,4 +62,39 @@ export default function MatchNotification({
                   className="w-5 h-5"
                   fill="currentColor"
                   viewBox="0 0 20 20"
-    
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              You and <span className="font-semibold">{match.full_name}</span>{" "}
+              liked each other!
+            </p>
+
+            <div className="flex space-x-2">
+              <button
+                onClick={handleStartChat}
+                className="flex-1 bg-gradient-to-r from-pink-500 to-red-500 text-white text-sm font-semibold py-2 px-4 rounded-full hover:from-pink-600 hover:to-red-600 transition-all duration-200"
+              >
+                Start Chat
+              </button>
+              <button
+                onClick={handleClose}
+                className="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-semibold py-2 px-4 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-200"
+              >
+                Later
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
