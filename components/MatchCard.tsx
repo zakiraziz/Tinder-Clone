@@ -142,4 +142,107 @@ export default function MatchCard({
               </div>
             </div>
           )}
+          {/* Content overlay */}
+          <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+            <div className="flex items-end justify-between mb-4">
+              <div className="flex-1">
+                <h2 className="text-2xl font-bold mb-1">
+                  {user.full_name}, {calculateAge(user.birthdate)}
+                </h2>
+                
+                {/* Location and distance */}
+                <div className="flex items-center gap-2 text-sm opacity-90 mb-2">
+                  <MapPin className="w-4 h-4" />
+                  <span>@{user.username}</span>
+                  {user.distance && (
+                    <>
+                      <span className="mx-1">•</span>
+                      <span>{user.distance}km away</span>
+                    </>
+                  )}
+                </div>
 
+                {/* Bio with expand functionality */}
+                {user.bio && (
+                  <div className="mb-3">
+                    <p className="text-sm leading-relaxed">
+                      {showFullBio ? user.bio : truncatedBio}
+                      {user.bio.length > MAX_BIO_LENGTH && (
+                        <button
+                          onClick={() => setShowFullBio(!showFullBio)}
+                          className="ml-1 text-blue-300 hover:text-blue-200 font-medium"
+                        >
+                          {showFullBio ? 'Show less' : 'Read more'}
+                        </button>
+                      )}
+                    </p>
+                  </div>
+                )}
+
+                {/* Interests tags */}
+                {commonInterests.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {commonInterests.map((interest, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium"
+                      >
+                        {interest}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {/* Additional details */}
+                {showDetails && user.additional_info && (
+                  <div className="space-y-2 text-xs">
+                    {user.occupation && (
+                      <div className="flex items-center gap-2">
+                        <BookOpen className="w-3 h-3" />
+                        <span>{user.occupation}</span>
+                      </div>
+                    )}
+                    {user.education && (
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-3 h-3" />
+                        <span>{user.education}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Like percentage if available */}
+              {user.match_percentage && (
+                <div className="flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-full p-3 ml-4">
+                  <Heart className="w-5 h-5 text-red-400 fill-current mr-1" />
+                  <span className="text-lg font-bold">{user.match_percentage}%</span>
+                </div>
+              )}
+            </div>
+
+            {/* Swipe hints */}
+            {isActive && onSwipe && (
+              <div className="flex items-center justify-between text-xs opacity-60">
+                <span className="text-red-300">← Swipe to pass</span>
+                <span className="text-green-300">Swipe to like →</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Swipe direction indicator */}
+      {isSwiping && (
+        <div 
+          className={`absolute inset-0 rounded-2xl border-4 ${
+            currentPosition.x - startPosition.x > 0 
+              ? 'border-green-400 bg-green-400/10' 
+              : 'border-red-400 bg-red-400/10'
+          } pointer-events-none transition-opacity duration-200`}
+          style={{ opacity: Math.min(Math.abs(currentPosition.x - startPosition.x) / 100, 0.3) }}
+        />
+      )}
+    </div>
+  );
+}
