@@ -13,15 +13,84 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    
+    // Additional strict type-checking options
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    
+    // Module resolution enhancements
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@/components/*": ["./components/*"],
+      "@/lib/*": ["./lib/*"],
+      "@/utils/*": ["./utils/*"],
+      "@/types/*": ["./types/*"],
+      "@/styles/*": ["./styles/*"],
+      "@/hooks/*": ["./hooks/*"]
+    },
+    
+    // Declaration files
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": true,
+    
+    // Additional checks
+    "forceConsistentCasingInFileNames": true,
+    "importsNotUsedAsValues": "error",
+    
+    // Plugins
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "paths": {
-      "@/*": ["./*"]
-    }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  
+  // Include files for type checking
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/__tests__/**/*.ts",
+    "**/__tests__/**/*.tsx",
+    "types/**/*.d.ts",
+    "env.d.ts",
+    "global.d.ts"
+  ],
+  
+  // Exclude files from type checking
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    ".next",
+    "out",
+    "coverage",
+    "*.config.js",
+    "**/*.js",
+    "cypress",
+    "**/__mocks__/**",
+    "**/__snapshots__/**"
+  ],
+  
+  // TypeScript configuration for specific environments
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es2017"
+    }
+  }
 }
