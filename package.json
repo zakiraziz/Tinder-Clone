@@ -2,16 +2,42 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "description": "A Next.js application with modern development tools",
+  "keywords": ["nextjs", "react", "typescript", "tailwindcss"],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "tsc --noEmit --watch",
+    "clean": "rm -rf .next && rm -rf out && rm -rf dist",
+    "clean:install": "npm run clean && rm -rf node_modules package-lock.json && npm install",
+    "analyze": "ANALYZE=true next build",
+    "analyze:bundle": "npm run analyze -- --bundle",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "preview": "vite preview --port 3001"
   },
   "dependencies": {
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "next": "15.4.7"
+    "next": "15.4.7",
+    "@headlessui/react": "^2.0.0",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^2.0.0",
+    "lucide-react": "^0.300.0",
+    "date-fns": "^3.0.0",
+    "zod": "^3.22.0",
+    "framer-motion": "^10.16.0",
+    "@hookform/resolvers": "^3.3.0",
+    "react-hook-form": "^7.48.0"
   },
   "devDependencies": {
     "typescript": "^5",
@@ -22,6 +48,65 @@
     "tailwindcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.4.7",
-    "@eslint/eslintrc": "^3"
+    "@eslint/eslintrc": "^3",
+    
+    // Testing
+    "jest": "^29.7.0",
+    "@testing-library/react": "^15.0.0",
+    "@testing-library/jest-dom": "^6.4.0",
+    "@testing-library/user-event": "^14.5.0",
+    "jest-environment-jsdom": "^29.7.0",
+    
+    // Storybook
+    "storybook": "^8.0.0",
+    "@storybook/react": "^8.0.0",
+    "@storybook/addon-essentials": "^8.0.0",
+    "@storybook/addon-interactions": "^8.0.0",
+    "@storybook/addon-links": "^8.0.0",
+    "@storybook/test-runner": "^0.15.0",
+    
+    // Development tools
+    "@types/jest": "^29.5.0",
+    "prettier": "^3.0.0",
+    "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.0",
+    "husky": "^9.0.0",
+    "lint-staged": "^15.0.0",
+    "npm-run-all": "^4.1.5",
+    "webpack-bundle-analyzer": "^4.10.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,mdx,css,html}": [
+      "prettier --write"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "moduleNameMapping": {
+      "^@/(.*)$": "<rootDir>/$1"
+    }
   }
 }
