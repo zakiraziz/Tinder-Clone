@@ -180,3 +180,126 @@ async function createFakeProfiles() {
 
       let userId: string;
 
+      if (existingAuthUser) {
+        console.log(
+          `⚠️ Auth user already exists for ${profile.full_name}, using existing...`
+        );
+        userId = existingAuthUser.id;
+      } else {
+        // Create new auth user
+        const { data: authData, error: authError } =
+          await supabase.auth.admin.createUser({
+            email: profile.email,
+            password: PASSWORD,
+            email_confirm: true, // Auto-confirm email
+            user_metadata: {
+              full_name: profile.full_name,
+              username: profile.username,
+            },
+          });
+
+        if (authError) {
+          console.error(
+            `❌ Error creating auth user for ${profile.full_name}:`,
+            authError
+          );
+          continue;
+        }
+
+        userId = authData.user.id;
+        console.log(`✅ Auth user created: ${userId}`);
+      }
+
+      // 2. Check if user profile already exists
+      const { data: existingProfile } = await supabase
+        .from("users")
+        .select("id")
+        .eq("id", userId)
+        .single();
+
+      if (existingProfile) {
+        console.log(
+          `⚠️ Profile already exists for ${profile.full_name}, updating...`
+        );
+
+        // Update existing profile with new data
+        const { error: updateError } = await supabase
+          .from("users")
+          .update({
+            full_name: profile.full_name,
+            username: profile.username,
+            email: profile.email,
+            gender: profile.gender,
+            birthdate: profile.birthdate,
+            bio: profile.bio,
+            avatar_url: profile.avatar_url,
+            preferences: profile.preferences,
+            location_lat: faker.location.latitude({ min: 37.7, max: 37.8 }), // San Francisco area
+            location_lng: faker.location.longitude({
+              min: -122.5,
+              max: -122.4,
+            }),
+            is_verified: true,
+            is_online: Math.random() > 0.5,
+          })
+          .eq("id", userId);
+
+        if (updateError) {
+          console.error(
+            `❌ Error updating profile for ${profile.full_name}:`,
+            updateError
+          );
+          continue;
+        }
+      } else {
+        // Insert new user profile data
+        const { error: profileError } = await supabase.from("users").insert({
+          id: userId,
+          full_name: profile.full_name,
+          username: profile.username,
+          email: profile.email,
+          gender: profile.gender,
+          birthdate: profile.birthdate,
+          bio: profile.bio,
+          avatar_url: profile.avatar_url,
+          preferences: profile.preferences,
+          location_lat: faker.location.latitude({ min: 37.7, max: 37.8 }), // San Francisco area
+          location_lng: faker.location.longitude({ min: -122.5, max: -122.4 }),
+          is_verified: true,
+          is_online: Math.random() > 0.5,
+        });
+
+        if (profileError) {
+          console.error(
+            `❌ Error creating profile for ${profile.full_name}:`,
+            profileError
+          );
+          // Try to clean up the auth user if profile creation fails
+          await supabase.auth.admin.deleteUser(userId);
+          continue;
+        }
+      }
+
+      console.log(`✅ Profile created successfully for ${profile.full_name}`);
+      console.log(`   📧 Email: ${profile.email}`);
+      console.log(`   🔑 Password: ${PASSWORD}`);
+      console.log(`   👤 Username: ${profile.username}`);
+    } catch (error) {
+      console.error(
+        `❌ Unexpected error creating profile for ${profile.full_name}:`,
+        error
+      );
+    }
+  }
+
+  console.log("\n🎉 Fake profile creation completed!");
+  console.log("\n📋 Summary:");
+  console.log('All accounts use password: "password"');
+  console.log("All emails are auto-confirmed");
+  console.log("Profiles include random location data in San Francisco area");
+  console.log("Some users are marked as online for testing");
+}
+
+// Run the script
+createFakeProfiles().catch(console.error);
+
