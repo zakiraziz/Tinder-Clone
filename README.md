@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔥 Spark - A Tinder Clone
+A modern, full-stack dating application inspired by Tinder. Swipe right on new connections and find your match!
 
-## Getting Started
+https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js
 
-First, run the development server:
+https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+https://img.shields.io/badge/Prisma-5.0-2D3748?style=for-the-badge&logo=prisma
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+https://img.shields.io/badge/PostgreSQL-16.0-4169E1?style=for-the-badge&logo=postgr
+esql
+https://img.shields.io/badge/Tailwind_CSS-3.0-06B6D4?style=for-the-badge&logo=tailwindcss
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+https://img.shields.io/badge/NextAuth.js-5.0-000?style=for-the-badge
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+</div>
+# 📖 Overview
+Spark is a full-stack clone of the popular dating app Tinder. It demonstrates key features of a modern web application, including real-time interactions, user authentication, and a responsive, swipeable UI.
 
-## Learn More
+Key Features:
 
-To learn more about Next.js, take a look at the following resources:
+Swipe Deck: Browse through user profiles by swiping right (like) or left (pass).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Matches: Get real-time notifications when someone you liked also likes you back.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Messaging: Chat instantly with your matches in a clean messaging interface.
 
-## Deploy on Vercel
+User Profiles: Create and customize your own profile with photos and a bio.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Authentication: Secure login via Google OAuth and email/password using NextAuth.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Advanced Filters: Filter potential matches by age, gender, and distance.
+
+# 🚀 Live Demo
+(If deployed, add your links here)
+
+Main Application: https://spark-app.vercel.app
+
+Staging Environment: https://spark-staging.vercel.app
+
+# 🛠️ Tech Stack
+This project is a showcase of modern full-stack development:
+
+Frontend Framework: Next.js 14 (App Router)
+
+Language: TypeScript
+
+Styling: Tailwind CSS
+
+Authentication: NextAuth.js
+
+Database: PostgreSQL
+
+ORM: Prisma
+
+HTTP Client: TanStack Query (React Query)
+
+Real-time Communication: Pusher (or Socket.io)
+
+Deployment: Vercel (Frontend), Railway (Database)
+
+# 📦 Project Structure
+
+spark-tinder-clone/
+
+├── app/                    # Next.js 13+ App Router
+
+│   ├── api/               # API route handlers
+
+│   ├── auth/              # NextAuth.js authentication routes
+
+│   ├── chat/              # Messaging pages
+
+│   ├── dashboard/         # User profile and settings
+
+│   ├── globals.css        # Global styles
+
+│   ├── layout.tsx         # Root layout
+
+│   └── page.tsx           # Home page (Swipe deck)
+
+├── components/            # Reusable UI components
+
+│   ├── ui/                # Basic components (Button, Card)
+
+│   ├── chat/              # Chat components
+
+│   └── deck/              # Swipe card components
+
+├── context/               # React Context for state management
+
+│   └── AuthContext.tsx    # User authentication state
+
+├── lib/                   # Utilities and configurations
+
+│   ├── prisma.ts          # Prisma client instance
+
+│   ├── pusher.ts          # Pusher client setup
+
+│   └── utils.ts           # Helper functions
+
+├── public/                # Static assets
+
+├── scripts/               # Custom scripts
+
+│   └── create-face-profile.ts # Seed script for demo profiles
+
+├── types/                 # TypeScript type definitions
+
+└── ...config files        # ESLint, Next, Tailwind, etc.
