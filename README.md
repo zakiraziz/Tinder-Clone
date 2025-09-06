@@ -108,3 +108,113 @@ spark-tinder-clone/
 ├── types/                 # TypeScript type definitions
 
 └── ...config files        # ESLint, Next, Tailwind, etc.
+#🚀 Getting Started
+Follow these instructions to get a copy of the project running on your local machine.
+
+Prerequisites
+Node.js 18.17 or later
+
+npm, yarn, or pnpm
+
+A PostgreSQL database (local or hosted, e.g., on Railway or Neon.tech)
+
+OAuth credentials (Google) for authentication
+
+Installation & Setup
+Clone the repository
+
+bash
+git clone https://github.com/your-username/spark-tinder-clone.git
+cd spark-tinder-clone
+Install dependencies
+
+bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+Set up environment variables
+Copy the example environment file and update it with your secrets.
+
+bash
+cp .env.example .env.local
+Fill in the required variables in your .env.local file:
+
+bash
+# Database
+DATABASE_URL="postgresql://username:password@localhost:5432/sparkdb"
+
+# NextAuth.js
+NEXTAUTH_SECRET="your-super-secret-nextauth-secret"
+NEXTAUTH_URL="http://localhost:3000"
+
+# OAuth Providers (Google)
+GOOGLE_CLIENT_ID="your-google-oauth-client-id"
+GOOGLE_CLIENT_SECRET="your-google-oauth-client-secret"
+
+# Pusher for real-time features (optional)
+PUSHER_APP_ID="your-pusher-app-id"
+PUSHER_KEY="your-pusher-key"
+PUSHER_SECRET="your-pusher-secret"
+PUSHER_CLUSTER="your-pusher-cluster"
+Set up the database
+Push the Prisma schema to your database to create the tables.
+
+bash
+npx prisma db push
+# or, if you prefer using migrations:
+npx prisma migrate dev --name init
+Seed the database (Optional)
+Run the script to populate the database with sample user profiles.
+
+bash
+npm run script:seed
+# or directly with tsx/ts-node
+npx tsx scripts/create-face-profile.ts
+Run the development server
+
+bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+Open http://localhost:3000 with your browser to see the result.
+
+# 🧪 Available Scripts
+npm run dev - Runs the development server.
+
+npm run build - Builds the app for production.
+
+npm run start - Starts the production server.
+
+npm run lint - Runs ESLint to lint the code.
+
+npm run db:studio - Opens Prisma Studio to view and edit database data.
+
+npm run script:seed - Runs the seed script to generate demo profiles.
+
+# 🔐 Authentication
+This app uses NextAuth.js for authentication. Currently configured providers:
+
+Google OAuth
+
+Email & Password (Credentials)
+
+User sessions are managed securely with JWT tokens.
+
+# 🤝 Contributing
+We are not accepting external contributions to this private project at this time. This codebase is intended for portfolio and educational purposes.
+
+# 📜 License
+This project is created for educational and portfolio purposes. The code is available for reference, but it is not licensed for redistribution or commercial use. All rights to the concept and brand "Tinder" belong to Match Group, Inc.
+
+# 👨‍💻 Developer
+Zakir Aziz
+
+Portfolio: your-portfolio.com
+
+LinkedIn: Zakir Aziz
+
+GitHub: @zakiraziz
