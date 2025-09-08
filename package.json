@@ -6,22 +6,42 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "type-check": "tsc --noEmit",
+    "analyze": "ANALYZE=true next build",
+    "prepare": "husky install"
   },
   "dependencies": {
+    "next": "15.4.7",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "next": "15.4.7"
+    "framer-motion": "^11",              // animations
+    "lucide-react": "^0.453",            // modern icons
+    "clsx": "^2.1.1",                    // conditional classNames
+    "zod": "^3.23",                      // schema validation
+    "axios": "^1.7",                     // HTTP client
+    "zustand": "^5.0",                   // state management
+    "next-themes": "^0.3",               // dark/light mode
+    "react-hook-form": "^7.53",          // forms
+    "@tanstack/react-query": "^5.55"     // server-state management
   },
   "devDependencies": {
     "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
     "tailwindcss": "^4",
+    "@tailwindcss/postcss": "^4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.40",
     "eslint": "^9",
     "eslint-config-next": "15.4.7",
-    "@eslint/eslintrc": "^3"
+    "@eslint/eslintrc": "^3",
+    "prettier": "^3.3.3",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.1.6",                   // Git hooks
+    "lint-staged": "^15.2.2",            // Run lint/format on staged files
+    "cross-env": "^7.0.3"                // Environment variable support
   }
 }
