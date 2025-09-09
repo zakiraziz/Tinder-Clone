@@ -110,3 +110,119 @@ const eslintConfig = [
           "newlines-between": "always",
           alphabetize: { order: "asc", caseInsensitive: true },
         },
+      ],
+      "import/no-unresolved": "error",
+      "import/named": "error",
+      "import/default": "error",
+      "import/namespace": "error",
+      "import/no-absolute-path": "error",
+      "import/no-dynamic-require": "error",
+      "import/no-webpack-loader-syntax": "error",
+      "import/no-self-import": "error",
+      "import/no-cycle": "error",
+      "import/no-useless-path-segments": "error",
+      "import/no-relative-packages": "error",
+      "import/export": "error",
+      "import/no-named-as-default": "error",
+      "import/no-named-as-default-member": "error",
+      "import/no-deprecated": "warn",
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          devDependencies: [
+            "**/*.test.*",
+            "**/*.spec.*",
+            "**/*.stories.*",
+            "**/test/**",
+            "**/__tests__/**",
+            "**/jest.config.*",
+            "**/vitest.config.*",
+            "**/setupTests.*",
+            "**/*.config.*",
+          ],
+        },
+      ],
+
+      // General JS rules
+      "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+      "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
+      "eqeqeq": ["error", "always", { null: "ignore" }],
+      "no-alert": "error",
+      "no-caller": "error",
+      "no-eval": "error",
+      "no-implied-eval": "error",
+      "no-new-func": "error",
+      "no-return-await": "error",
+      "require-await": "error",
+      "no-throw-literal": "error",
+      "prefer-promise-reject-errors": "error",
+      "no-unused-expressions": "error",
+      "no-promise-executor-return": "error",
+      "max-depth": ["warn", 4],
+      "complexity": ["warn", 10],
+      "max-params": ["warn", 4],
+
+      // Prettier integration
+      "prettier/prettier": "error",
+    },
+  },
+  {
+    ignores: [
+      "node_modules/",
+      ".next/",
+      "dist/",
+      "build/",
+      "coverage/",
+      "*.config.js",
+      "*.config.ts",
+      "public/",
+      "*.generated.*",
+      "storybook-static/",
+      ".vercel/",
+      ".output/",
+    ],
+  },
+  {
+    settings: {
+      react: {
+        version: "detect",
+      },
+      "import/parsers": {
+        "@typescript-eslint/parser": [".ts", ".tsx"],
+      },
+      "import/resolver": {
+        typescript: {
+          alwaysTryTypes: true,
+          project: "./tsconfig.json",
+        },
+        node: {
+          extensions: [".js", ".jsx", ".ts", ".tsx"],
+        },
+      },
+    },
+  },
+  // Overrides for specific file types
+  {
+    files: ["**/*.test.*", "**/*.spec.*", "**/__tests__/**"],
+    rules: {
+      "no-console": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
+    },
+  },
+  {
+    files: ["**/*.stories.*"],
+    rules: {
+      "no-console": "off",
+      "import/no-extraneous-dependencies": "off",
+    },
+  },
+  {
+    files: ["**/*.config.*"],
+    rules: {
+      "import/no-extraneous-dependencies": "off",
+    },
+  },
+];
+
+export default eslintConfig;
