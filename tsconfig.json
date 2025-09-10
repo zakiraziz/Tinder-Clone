@@ -20,25 +20,75 @@
     "noUnusedParameters": true,
     "exactOptionalPropertyTypes": true,
     "strictNullChecks": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    
+    // Additional strictness options
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    
+    // Code quality improvements
+    "noUncheckedIndexedAccess": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "exactOptionalPropertyTypes": true,
+    
+    // Module resolution enhancements
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
       "@styles/*": ["styles/*"],
       "@hooks/*": ["hooks/*"],
-      "@lib/*": ["lib/*"]
-    }
+      "@lib/*": ["lib/*"],
+      "@types/*": ["types/*"],
+      "@public/*": ["public/*"]
+    },
+    
+    // Output and debugging
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": true,
+    "removeComments": false,
+    
+    // Interop constraints
+    "allowUmdGlobalAccess": false,
+    
+    // Advanced type checking
+    "useUnknownInCatchVariables": true,
+    
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "types/**/*.d.ts"
   ],
-  "exclude": ["node_modules", "dist", "build"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    ".next",
+    "coverage",
+    "*.config.js",
+    "*.config.ts"
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
 }
